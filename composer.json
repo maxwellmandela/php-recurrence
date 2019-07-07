@@ -1,0 +1,37 @@
+{
+    "name": "maxwellmandela/php-recurring-events",
+    "description": "PHP library for working with recurrence rules, uses simshaun/recurr",
+    "keywords": [
+        "rrule",
+        "recurrence",
+        "recurring",
+        "events",
+        "dates"
+    ],
+    "type": "library",
+    "authors": [
+        {
+            "name": "Maxwell Mandela",
+            "email": "mxmandela@gmail.com"
+        }
+    ],
+    "require": {
+        "simshaun/recurr": "^4.0",
+        "nesbot/carbon": "^2.20"
+    },
+    "autoload": {
+        "files": [
+            "bootstrap.php"
+        ],
+        "classmap": [
+            "src/"
+        ],
+        "psr-4": {
+            "Recurrence\\": "src/Recurrence",
+            "Recurrence\\Test\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "8"
+    }
+}
