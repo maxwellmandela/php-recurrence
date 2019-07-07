@@ -19,6 +19,7 @@
         "simshaun/recurr": "^4.0",
         "nesbot/carbon": "^2.20"
     },
+    "license": "MIT",
     "autoload": {
         "files": [
             "bootstrap.php"
