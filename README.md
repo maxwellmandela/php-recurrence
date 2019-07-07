@@ -14,7 +14,11 @@ How to
 
 ### Install
 
+Install using [Composer](http://getcomposer.org):
+
 `composer require maxwellmandela/php-recurrence`
+
+No composer? You can clone/download the repository and use the package directly by including `bootstrap.php` onto your script
 
 
 ### Seting up
