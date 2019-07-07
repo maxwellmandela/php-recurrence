@@ -1,4 +1,4 @@
-# PHP Recurring events library
+# php-recurrence - A PHP Recurring events library
 
 > PHP library for working with recurrence rules, uses [simshaun/recurr](https://github.com/simshaun/recurr)
 
@@ -16,7 +16,9 @@ How to
 
 Install using [Composer](http://getcomposer.org):
 
-`composer require maxwellmandela/php-recurrence`
+```
+composer require maxwellmandela/php-recurrence
+```
 
 No composer? You can clone/download the repository and use the package directly by including `bootstrap.php` onto your script
 
@@ -39,7 +41,7 @@ $events = $schedule->createEvents([
     'start' => '2019-07-01 00:00:00',
     'end'   => '2019-07-31 00:00:00',
     'interval' => 2,
-    'freq' => 'WEEKLY',
+    'freq' => 'WEEKLY', // MONTHLY|YEARLY|DAILY|HOURLY
 ]);
 ```
 
