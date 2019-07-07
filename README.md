@@ -11,17 +11,19 @@
 How to 
 -----------
 
-### Seting up
 
+### Seting up
+Configure your script for `php-recurrence`
 
 ```php
 $timezone    = 'Africa/Nairobi';
 $schedule = new use Reccurence\Schedule($timezone);
 ```
 
+
 ### Creating a simple weekly frequency
 
-You can create a simple array of dates by passing the start,end,freq, interval this way
+You can create a simple array of dates by passing the `start,end,freq,interval` this way
 
 ```php
 $events = $schedule->createEvents([
@@ -34,7 +36,7 @@ $events = $schedule->createEvents([
 
 ### Creating a weekly frequency with `no. of times` per interval
 
-You can create an array of dates by passing the start,end,freq, interval,recurrence_count this way
+You can create an array of dates and number of recurrence per interval by passing the `start,end,freq,interval,recurrence_count` this way
 
 ```php
 $events = $schedule->createEvents([
@@ -43,7 +45,7 @@ $events = $schedule->createEvents([
     'interval' => 2,
     'freq' => 'WEEKLY',
 
-    // how many times a week
+    // how many times a week for a WEEKLY frequency
     'recurrence_count' => 3,
 ]);
 ```
