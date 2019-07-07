@@ -24,6 +24,8 @@ class Schedule
         'interval'
     ];
 
+    const MINIMUM_VARIABLES = 4;
+
     /**
      * string $timezone
      */
@@ -76,7 +78,7 @@ class Schedule
     {
         $valid = 0;
 
-        if (count($variables) < 1) {
+        if (count($variables) < self::MINIMUN_VARIABLES) {
             return false;
         }
 
