@@ -200,4 +200,19 @@ class Schedule
 
         return $dates;
     }
+
+
+    public function filter($events, $date)
+    {
+        $valid = [];
+        for ($i = 0; $i < count($events); $i++) {
+            $start = Carbon::parse($events[$i]['start']);
+            $date = Carbon::parse($date);
+            if ($start->equalTo($date)) {
+                array_push($valid, $events[$i]);
+            }
+        }
+
+        return $valid;
+    }
 }

@@ -64,4 +64,26 @@ class ScheduleTest extends TestCase
 
         $this->hasEvents($events);
     }
+
+    /**
+     * Filters events
+     */
+    public function testCanFilterEventsByDate()
+    {
+
+        // check is a given date's event
+        $events = $this->schedule->createEvents([
+            'start' => '2019-07-01 00:00:00',
+            'end'   => '2019-07-31 00:00:00',
+            'interval' => 2,
+            'freq' => 'WEEKLY',
+
+            // how many times a week
+            'recurrence_count' => 3,
+        ]);
+
+        $filtered = $this->schedule->filter($events, '2019-07-02 00:00:00');
+
+        $this->hasEvents($filtered);
+    }
 }
