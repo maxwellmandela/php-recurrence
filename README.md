@@ -11,13 +11,26 @@
 How to 
 -----------
 
-### Creating simple frequency
+### Creating a simple WEEKLY frequency
 
-You can create a simple array or dates by passing the start,end,freq, interval this way
+You can create a simple array of dates by passing the start,end,freq, interval this way
 
 ```php
 $timezone    = 'Africa/Nairobi';
 $schedule = new use Reccurence\Schedule($timezone);
+$events = $schedule->createEvents([
+    'start' => '2019-07-01 00:00:00',
+    'end'   => '2019-07-31 00:00:00',
+    'interval' => 2,
+    'freq' => 'WEEKLY',
+]);
+```
+
+### Creating a WEEKLY frequency with `no. of times` per interval
+
+You can create an array of dates by passing the start,end,freq, interval,recurrence_count this way
+
+```php
 $events = $schedule->createEvents([
     'start' => '2019-07-01 00:00:00',
     'end'   => '2019-07-31 00:00:00',
@@ -28,7 +41,6 @@ $events = $schedule->createEvents([
     'recurrence_count' => 3,
 ]);
 ```
-
 
 
 ## Credits
