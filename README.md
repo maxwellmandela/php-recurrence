@@ -5,7 +5,7 @@
 ## What it does
 
 > Very simply, php-recurrence enables scheduling recurring events a level lower than simshaun/recurr, e.g `twice every 3 weeks`
-> This will enable have the event recurring two times every 3 week
+> This will generate an event recurring two times every 3 weeks
 
 
 How to 
