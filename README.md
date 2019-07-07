@@ -12,6 +12,11 @@ How to
 -----------
 
 
+### Install
+
+`composer require maxwellmandela/php-recurrence`
+
+
 ### Seting up
 Configure your script for `php-recurrence`
 
