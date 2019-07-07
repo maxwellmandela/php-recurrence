@@ -24,7 +24,7 @@ class Schedule
         'interval'
     ];
 
-    const MINIMUM_VARIABLES = 4;
+    const MINIMUN_VARIABLES = 4;
 
     /**
      * string $timezone
