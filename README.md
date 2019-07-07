@@ -44,8 +44,8 @@ $events = $schedule->createEvents([
 
 
 ## Credits
-> simshaun/recurr
-> nesbot/carbon
+##### simshaun/recurr
+##### nesbot/carbon
 
 ## Contribution
 
