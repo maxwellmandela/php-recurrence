@@ -27,8 +27,9 @@ No composer? You can clone/download the repository and use the package directly 
 Configure your script for `php-recurrence`
 
 ```php
-$timezone    = 'Africa/Nairobi';
 use Reccurence\Schedule;
+
+$timezone    = 'Africa/Nairobi';
 $schedule = new Schedule($timezone);
 ```
 
