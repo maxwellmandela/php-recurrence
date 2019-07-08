@@ -28,7 +28,8 @@ Configure your script for `php-recurrence`
 
 ```php
 $timezone    = 'Africa/Nairobi';
-$schedule = new use Reccurence\Schedule($timezone);
+use Reccurence\Schedule;
+$schedule = new Schedule($timezone);
 ```
 
 
