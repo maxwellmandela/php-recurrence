@@ -43,7 +43,9 @@ $events = $schedule->createEvents([
     'start' => '2019-07-01 00:00:00',
     'end'   => '2019-07-31 00:00:00',
     'interval' => 2,
-    'freq' => 'WEEKLY', // MONTHLY|YEARLY|DAILY|HOURLY
+
+    // for weekly events, you can change this to either  MONTHLY|YEARLY|DAILY|HOURLY
+    'freq' => 'WEEKLY',
 ]);
 ```
 
