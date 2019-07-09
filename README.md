@@ -45,6 +45,7 @@ $events = $schedule->createEvents([
     'interval' => 2,
 
     // for weekly events, you can change this to either  MONTHLY|YEARLY|DAILY|HOURLY
+    // read more here: https://tools.ietf.org/html/rfc5545 for all valid frequencies
     'freq' => 'WEEKLY',
 ]);
 ```
@@ -60,7 +61,7 @@ $events = $schedule->createEvents([
     'interval' => 2,
     'freq' => 'WEEKLY',
 
-    // how many times a week for a WEEKLY frequency
+    // for an event recurring 3 times(recurrence_count) every(interval)  2 weeks(freq)
     'recurrence_count' => 3,
 ]);
 ```

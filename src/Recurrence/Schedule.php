@@ -23,23 +23,19 @@ use Recurr\Transformer\ArrayTransformer;
 use Recurr\Transformer\ArrayTransformerConfig;
 use Recurr\Transformer\Constraint\BeforeConstraint;
 
+use Reccurence\Traits\ValidatesInputs;
+use Reccurence\ScheduleInterface;
+
 /**
  * Recurrence/Schedule
  * 
  * Creates events from Reccur/Rule
  * 
  */
-class Schedule
+class Schedule implements ScheduleInterface
 {
 
-    private const VARIABLE_KEYS = [
-        'start',
-        'end',
-        'freq',
-        'interval'
-    ];
-
-    private const  MINIMUN_VARIABLES = 4;
+    use ValidatesInputs;
 
     /**
      * @var string $timezone
@@ -99,26 +95,6 @@ class Schedule
             'success' => false,
             'message' => 'Missing arguments'
         ];
-    }
-
-    /**
-     * Validates inputs
-     * 
-     * @param array $variables
-     */
-    public function validateInputs($variables)
-    {
-        $valid = 0;
-        if (count($variables) < self::MINIMUN_VARIABLES) {
-            return false;
-        }
-
-        foreach (self::VARIABLE_KEYS as $key) {
-            if (array_key_exists($key, $variables)) {
-                $valid++;
-            }
-        }
-        return count(self::VARIABLE_KEYS) == $valid;
     }
 
 
