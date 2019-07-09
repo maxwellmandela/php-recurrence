@@ -1,3 +1,7 @@
+![calendar](https://image.flaticon.com/icons/svg/123/123392.svg)
+
+<div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"                 title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"                 title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
 # php-recurrence - A PHP Recurring events library
 
 > PHP library for working with recurrence rules, uses [simshaun/recurr](https://github.com/simshaun/recurr)
