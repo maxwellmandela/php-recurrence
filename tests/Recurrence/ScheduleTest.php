@@ -2,8 +2,8 @@
 
 namespace Recurrence\Test;
 
-use Reccurence\Schedule;
 use PHPUnit\Framework\TestCase;
+use Reccurence\Schedule;
 
 class ScheduleTest extends TestCase
 {
@@ -22,13 +22,13 @@ class ScheduleTest extends TestCase
         $events = $this->schedule->createEvents([]);
         $this->assertSame([
             'success' => false,
-            'message' => 'Missing arguments'
+            'message' => 'Missing arguments',
         ], $events);
     }
 
     /**
-     * Asserts events valid, 
-     * 
+     * Asserts events valid,.
+     *
      * @param array $array
      */
     public function hasEvents($array)
@@ -41,10 +41,10 @@ class ScheduleTest extends TestCase
     public function testCanScheduleByWeek()
     {
         $events = $this->schedule->createEvents([
-            'start' => '2019-07-01 00:00:00',
-            'end'   => '2019-07-31 00:00:00',
+            'start'    => '2019-07-01 00:00:00',
+            'end'      => '2019-07-31 00:00:00',
             'interval' => 2,
-            'freq' => 'WEEKLY'
+            'freq'     => 'WEEKLY',
         ]);
 
         $this->hasEvents($events);
@@ -53,10 +53,10 @@ class ScheduleTest extends TestCase
     public function testCanScheduleMultipleDaysByWeek()
     {
         $events = $this->schedule->createEvents([
-            'start' => '2019-07-01 00:00:00',
-            'end'   => '2019-07-31 00:00:00',
+            'start'    => '2019-07-01 00:00:00',
+            'end'      => '2019-07-31 00:00:00',
             'interval' => 2,
-            'freq' => 'WEEKLY',
+            'freq'     => 'WEEKLY',
 
             // how many times a week
             'recurrence_count' => 3,
@@ -66,17 +66,17 @@ class ScheduleTest extends TestCase
     }
 
     /**
-     * Filters events
+     * Filters events.
      */
     public function testCanFilterEventsByDate()
     {
 
         // check is a given date's event
         $events = $this->schedule->createEvents([
-            'start' => '2019-07-01 00:00:00',
-            'end'   => '2019-07-31 00:00:00',
+            'start'    => '2019-07-01 00:00:00',
+            'end'      => '2019-07-31 00:00:00',
             'interval' => 2,
-            'freq' => 'WEEKLY',
+            'freq'     => 'WEEKLY',
 
             // how many times a week
             'recurrence_count' => 3,
