@@ -32,31 +32,48 @@ use Recurr\Transformer\Constraint\BeforeConstraint;
 class Schedule
 {
 
-    const VARIABLE_KEYS = [
+    private const VARIABLE_KEYS = [
         'start',
         'end',
         'freq',
         'interval'
     ];
 
-    const MINIMUN_VARIABLES = 4;
+    private const  MINIMUN_VARIABLES = 4;
 
     /**
-     * string $timezone
+     * @var string $timezone
      */
     private $timezone = '';
 
 
-    // transformer
+    /**
+     * @var transformer
+     */
     private $transformer;
 
+    /**
+     * @var transformerConfig
+     */
     private $transformerConfig;
 
 
+    /**
+     * Setup
+     */
     public function __construct($timezone)
     {
         $this->timezone = $timezone;
 
+        /**
+         * The transformer configuration for last of day of month fix
+         * 
+         * By default, if your start date is on the 29th, 30th, or 31st, 
+         * Recurr will skip following months that don't have at least that many days. 
+         * (e.g. Jan 31 + 1 month = March)
+         * 
+         * Read more: https://github.com/simshaun/recurr#warnings
+         */
         $this->transformerConfig = new ArrayTransformerConfig();
         $this->transformerConfig->enableLastDayOfMonthFix();
 
@@ -92,7 +109,6 @@ class Schedule
     public function validateInputs($variables)
     {
         $valid = 0;
-
         if (count($variables) < self::MINIMUN_VARIABLES) {
             return false;
         }
@@ -102,7 +118,6 @@ class Schedule
                 $valid++;
             }
         }
-
         return count(self::VARIABLE_KEYS) == $valid;
     }
 
@@ -169,10 +184,13 @@ class Schedule
 
         foreach ($events as $key => $value) {
             $start = $value->getStart()->format('Y-m-d H:i:s');
+
+
             if ($key > 0) {
                 $start = new Carbon(end($week_events));
                 $start = $start->add($interval, 'weeks')->format('Y-m-d H:i:s');
             }
+
             $end = new Carbon($start);
             $end = $end->add(7, 'days')->format('Y-m-d H:i:s');
             $rule        = new Rule('FREQ=DAILY', new \DateTime($start), new \DateTime($end), $this->timezone);
@@ -180,7 +198,7 @@ class Schedule
             $events = $this->transformer->transform($rule, $constraint);
 
             // set selected weeks days, must be less than or equal to $recurrence_count
-            // TODO: gte the next day by a day from the previous one, using carbon
+            // TODO: get the next day by a day from the previous one, using carbon
             for ($i = 0; $i < $recurrence_count; $i++) {
                 if ($events[$i]) {
                     array_push($dates, $events[$i]);
@@ -217,6 +235,13 @@ class Schedule
     }
 
 
+    /**
+     * Filters events by `start` date
+     * 
+     * @param mixed $events
+     * 
+     * @param date $date
+     */
     public function filter($events, $date)
     {
         $valid = [];
