@@ -18,30 +18,25 @@
 namespace Reccurence;
 
 use Carbon\Carbon;
+use Reccurence\Traits\ValidatesInputs;
 use Recurr\Rule;
 use Recurr\Transformer\ArrayTransformer;
 use Recurr\Transformer\ArrayTransformerConfig;
 use Recurr\Transformer\Constraint\BeforeConstraint;
 
-use Reccurence\Traits\ValidatesInputs;
-use Reccurence\ScheduleInterface;
-
 /**
- * Recurrence/Schedule
- * 
+ * Recurrence/Schedule.
+ *
  * Creates events from Reccur/Rule
- * 
  */
 class Schedule implements ScheduleInterface
 {
-
     use ValidatesInputs;
 
     /**
-     * @var string $timezone
+     * @var string
      */
     private $timezone = '';
-
 
     /**
      * @var transformer
@@ -53,21 +48,20 @@ class Schedule implements ScheduleInterface
      */
     private $transformerConfig;
 
-
     /**
-     * Setup
+     * Setup.
      */
     public function __construct($timezone)
     {
         $this->timezone = $timezone;
 
-        /**
+        /*
          * The transformer configuration for last of day of month fix
-         * 
-         * By default, if your start date is on the 29th, 30th, or 31st, 
-         * Recurr will skip following months that don't have at least that many days. 
+         *
+         * By default, if your start date is on the 29th, 30th, or 31st,
+         * Recurr will skip following months that don't have at least that many days.
          * (e.g. Jan 31 + 1 month = March)
-         * 
+         *
          * Read more: https://github.com/simshaun/recurr#warnings
          */
         $this->transformerConfig = new ArrayTransformerConfig();
@@ -77,39 +71,35 @@ class Schedule implements ScheduleInterface
         $this->transformer->setConfig($this->transformerConfig);
     }
 
-
     /**
-     * Creates events from given rule
-     * 
+     * Creates events from given rule.
+     *
      * @param array $variables
      */
     public function createEvents(array $variables)
     {
         if ($this->validateInputs($variables)) {
             $events = $this->createEventsFromValidInputs($variables);
-            return $events;
-        };
 
+            return $events;
+        }
 
         return [
             'success' => false,
-            'message' => 'Missing arguments'
+            'message' => 'Missing arguments',
         ];
     }
 
-
     /**
-     * Create the actual event dates from recurrence rule
-     * 
+     * Create the actual event dates from recurrence rule.
+     *
      * @param array $variables
      */
     public function createEventsFromValidInputs($variables)
     {
-
-        $startDate   = new \DateTime($variables['start'], new \DateTimeZone($this->timezone));
-        $endDate     = new \DateTime($variables['end'], new \DateTimeZone($this->timezone));
-        $rule        = new Rule('FREQ=' . $variables['freq'] . ';INTERVAL=' . $variables['interval'], $startDate, $endDate, $this->timezone);
-
+        $startDate = new \DateTime($variables['start'], new \DateTimeZone($this->timezone));
+        $endDate = new \DateTime($variables['end'], new \DateTimeZone($this->timezone));
+        $rule = new Rule('FREQ='.$variables['freq'].';INTERVAL='.$variables['interval'], $startDate, $endDate, $this->timezone);
 
         // apply constraint - before end date
         $constraint = new BeforeConstraint(new \DateTime($variables['end']));
@@ -126,7 +116,6 @@ class Schedule implements ScheduleInterface
         return $this->eventsAsArray($events);
     }
 
-
     public function createEventsByReccurenceCount($variables, $events)
     {
         switch ($variables['freq']) {
@@ -140,19 +129,17 @@ class Schedule implements ScheduleInterface
         }
     }
 
-
     /**
-     * Handles creating WEEKLY events
-     * 
+     * Handles creating WEEKLY events.
+     *
      * @param array $events
-     * 
      * @param array $variables
-     * 
+     *
      * @return array $dates
      */
-    function weeklyReccurence($events, $variables)
+    public function weeklyReccurence($events, $variables)
     {
-        $interval =  $variables['interval'];
+        $interval = $variables['interval'];
         $recurrence_count = $variables['recurrence_count'];
 
         $week_events = [];
@@ -161,7 +148,6 @@ class Schedule implements ScheduleInterface
         foreach ($events as $key => $value) {
             $start = $value->getStart()->format('Y-m-d H:i:s');
 
-
             if ($key > 0) {
                 $start = new Carbon(end($week_events));
                 $start = $start->add($interval, 'weeks')->format('Y-m-d H:i:s');
@@ -169,7 +155,7 @@ class Schedule implements ScheduleInterface
 
             $end = new Carbon($start);
             $end = $end->add(7, 'days')->format('Y-m-d H:i:s');
-            $rule        = new Rule('FREQ=DAILY', new \DateTime($start), new \DateTime($end), $this->timezone);
+            $rule = new Rule('FREQ=DAILY', new \DateTime($start), new \DateTime($end), $this->timezone);
             $constraint = new BeforeConstraint(new \DateTime($end));
             $events = $this->transformer->transform($rule, $constraint);
 
@@ -187,15 +173,14 @@ class Schedule implements ScheduleInterface
         return $this->eventsAsArray($dates);
     }
 
-
     /**
-     * Creates array from events
-     * 
+     * Creates array from events.
+     *
      * @param array $events
      */
     public function eventsAsArray($events)
     {
-        $dates = array();
+        $dates = [];
 
         foreach ($events as $key => $value) {
             $start = $value->getStart()->format('Y-m-d H:i:s');
@@ -203,20 +188,18 @@ class Schedule implements ScheduleInterface
 
             array_push($dates, [
                 'start' => $start,
-                'end'   => $end
+                'end'   => $end,
             ]);
         }
 
         return $dates;
     }
 
-
     /**
-     * Filters events by `start` date
-     * 
+     * Filters events by `start` date.
+     *
      * @param mixed $events
-     * 
-     * @param date $date
+     * @param date  $date
      */
     public function filter($events, $date)
     {

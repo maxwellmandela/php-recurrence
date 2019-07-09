@@ -17,56 +17,48 @@
 
 namespace Reccurence;
 
-
 /**
- * Recurrence/ScheduleInterface
- * 
+ * Recurrence/ScheduleInterface.
+ *
  * Creates events from Reccur/Rule
- * 
  */
 interface ScheduleInterface
 {
-
     public const INPUT_KEYS = [
         'start',
         'end',
         'freq',
-        'interval'
+        'interval',
     ];
 
     public const  MINIMUN_INPUTS = 4;
 
-
     /**
-     * Creates events from given rule
-     * 
+     * Creates events from given rule.
+     *
      * @param array $variables
      */
     public function createEvents(array $variables);
 
-
     /**
-     * Create the actual event dates from recurrence rule
-     * 
+     * Create the actual event dates from recurrence rule.
+     *
      * @param array $variables
      */
     public function createEventsFromValidInputs($variables);
 
-
     /**
-     * Creates array from events
-     * 
+     * Creates array from events.
+     *
      * @param array $events
      */
     public function eventsAsArray($events);
 
-
     /**
-     * Filters events by `start` date
-     * 
+     * Filters events by `start` date.
+     *
      * @param mixed $events
-     * 
-     * @param date $date
+     * @param date  $date
      */
     public function filter($events, $date);
 }

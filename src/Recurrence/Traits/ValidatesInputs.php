@@ -17,18 +17,16 @@
 
 namespace Reccurence\Traits;
 
-
 /**
- *  Validates the inputs for scheduling events
- * 
+ *  Validates the inputs for scheduling events.
+ *
  *  Checks minimum requirements against supplied
  */
 trait ValidatesInputs
 {
-
     /**
-     * Validates inputs
-     * 
+     * Validates inputs.
+     *
      * @param array $inputs
      */
     public function validateInputs($inputs)
@@ -43,6 +41,7 @@ trait ValidatesInputs
                 $valid++;
             }
         }
+
         return count(self::INPUT_KEYS) == $valid;
     }
 }
