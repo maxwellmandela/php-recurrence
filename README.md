@@ -8,8 +8,9 @@
 
 ## What it does
 
-> Very simply, php-recurrence enables scheduling recurring events a level lower than simshaun/recurr, e.g `twice every 3 weeks`
+> Very simply, php-recurrence enables scheduling recurring events much like  simshaun/recurr but with more abtraction, e.g `twice every 3 weeks`
 > This will generate an event recurring two times every 3 weeks
+> It also needs to be mentioned that this is an approach to learning to TDD in PHP
 
 
 How to 
